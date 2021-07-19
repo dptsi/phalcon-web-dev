@@ -4,7 +4,7 @@ ARG PHALCON_VERSION=3.4.5
 ARG PHALCON_EXT_PATH=php7/64bits
 
 # Install packages and remove default server definition
-RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev && \
+RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev git && \
     rm /etc/nginx/conf.d/default.conf
 
 # Install PHP extensions
