@@ -8,7 +8,7 @@ RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-
     rm /etc/nginx/conf.d/default.conf
 
 # Install PHP extensions
-RUN docker-php-ext-install bcmath gd exif pcntl intl
+RUN docker-php-ext-install bcmath gd exif pcntl intl zip
 
 # Install PHP phalcon
 RUN set -xe && \
