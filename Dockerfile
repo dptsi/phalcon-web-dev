@@ -7,6 +7,9 @@ ARG PHALCON_EXT_PATH=php7/64bits
 RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev git && \
     rm /etc/nginx/conf.d/default.conf
 
+#Install PHP ZIP
+RUN apk add --no-cache zip libzip-dev
+
 # Install PHP extensions
 RUN docker-php-ext-install bcmath gd exif pcntl intl zip
 
