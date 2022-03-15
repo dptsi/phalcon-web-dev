@@ -25,7 +25,7 @@ RUN docker-php-ext-configure gd \
 && docker-php-ext-install gd
 
 # Install PHP extensions
-RUN docker-php-ext-install bcmath gd exif pcntl intl zip
+RUN docker-php-ext-install bcmath exif pcntl intl zip
 
 # Install PHP phalcon
 RUN set -xe && \
