@@ -4,18 +4,25 @@ ARG PHALCON_VERSION=3.4.5
 ARG PHALCON_EXT_PATH=php7/64bits
 
 # Install packages and remove default server definition
-RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev git \
-    freetype-dev libmcrypt-dev libpng-dev libjpeg-turbo-dev && \
-    rm /etc/nginx/conf.d/default.conf
+RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev icu-dev icu-libs librdkafka-dev git \
+    && rm /etc/nginx/conf.d/default.conf
 
 # Install PHP ZIP
 RUN apk add --no-cache zip libzip-dev
 
 # Installs GD extension and the required libraries: 
-RUN set -x \
-    apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd
+RUN apk update && apk add --no-cache \
+freetype-dev \
+libpng-dev \
+jpeg-dev \
+libjpeg-turbo-dev
+
+RUN docker-php-ext-configure gd \
+--with-freetype-dir=/usr/lib/ \
+--with-png-dir=/usr/lib/ \
+--with-jpeg-dir=/usr/lib/ \
+--with-gd \
+&& docker-php-ext-install gd
 
 # Install PHP extensions
 RUN docker-php-ext-install bcmath gd exif pcntl intl zip
