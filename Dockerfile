@@ -42,6 +42,9 @@ RUN pecl install redis && docker-php-ext-enable redis
 # Install rdkafka
 RUN pecl install rdkafka && docker-php-ext-enable rdkafka
 
+# Install PHP GRPC
+RUN pecl install grpc && docker-php-ext-enable grpc
+
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
